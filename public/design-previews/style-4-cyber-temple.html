@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>预览 4 · 赛博道观</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body { min-height: 100vh; color: #e7ecff; background: #05070d; font-family: "Songti SC","STSong",serif; overflow-x: hidden; }
+    body::before { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(37,224,200,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,224,200,.06) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    body::after { content: ""; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,51,64,.025) 0 1px, transparent 1px 3px); pointer-events: none; }
+    .shell { position: relative; width: min(1180px,100%); margin: 0 auto; padding: 24px 30px 38px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid rgba(255,51,64,.55); }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .seal { display: grid; place-items: center; width: 52px; height: 52px; color: #05070d; background: linear-gradient(135deg,#ff3340,#ffc857); font: 700 25px "Kaiti SC","KaiTi",serif; box-shadow: 0 0 26px rgba(255,51,64,.55); transform: rotate(-3deg); }
+    h1 { font: 700 29px "Kaiti SC","KaiTi",serif; letter-spacing: .14em; text-shadow: 0 0 18px rgba(255,51,64,.55); }
+    .sub { margin-top: 4px; color: #37c9b5; font: 700 11px "Courier New",monospace; letter-spacing: .2em; }
+    .tag { color: #ffc857; border: 1px solid #ffc857; padding: 7px 11px; font: 700 11px "Courier New",monospace; letter-spacing: .16em; box-shadow: 0 0 14px rgba(255,200,87,.25); }
+    main { display: grid; grid-template-columns: 470px 1fr; gap: 24px; padding-top: 24px; }
+    .hud { position: relative; aspect-ratio: 4/3; overflow: hidden; background: #070a14; border: 1px solid rgba(255,51,64,.8); box-shadow: 0 0 34px rgba(255,51,64,.18), inset 0 0 60px rgba(255,51,64,.08); }
+    .hud::before, .hud::after { content:""; position: absolute; width: 34px; height: 34px; border-color: #25e0c8; }
+    .hud::before { left: 8px; top: 8px; border-left: 2px solid; border-top: 2px solid; }
+    .hud::after { right: 8px; bottom: 8px; border-right: 2px solid; border-bottom: 2px solid; }
+    .cam-subject { position: absolute; inset: 0; display: grid; place-items: center; }
+    .hand-svg { width: 230px; height: 230px; fill: none; stroke: #25e0c8; stroke-width: 1.8; filter: drop-shadow(0 0 10px rgba(37,224,200,.7)); }
+    .scan { position: absolute; left: 0; right: 0; top: -20%; height: 20%; background: linear-gradient(180deg, transparent, rgba(37,224,200,.22), transparent); animation: scan 3.2s linear infinite; }
+    @keyframes scan { to { top: 110%; } }
+    .hud-label { position: absolute; left: 16px; top: 12px; color: #25e0c8; font: 700 11px "Courier New",monospace; letter-spacing: .18em; }
+    .hud-label.red { color: #ff3340; }
+    .hud-data { position: absolute; right: 16px; bottom: 12px; color: #ffc857; font: 700 10px "Courier New",monospace; letter-spacing: .14em; }
+    .deck { position: relative; min-height: 330px; }
+    .deck-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px; }
+    .deck-head h2 { font: 700 23px "Kaiti SC",serif; letter-spacing: .08em; text-shadow: 0 0 16px rgba(255,200,87,.3); }
+    .deck-count { color: #25e0c8; font: 700 11px "Courier New",monospace; letter-spacing: .16em; }
+    .fan { position: relative; height: 300px; }
+    .card { position: absolute; left: 50%; top: 24px; width: 168px; height: 248px; margin-left: -84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 18px 14px; text-align: center; background: linear-gradient(160deg,#0d1220,#070a14); border: 1px solid rgba(37,224,200,.5); transform-origin: 50% 96%; }
+    .card::before { content:""; position: absolute; left: 8px; top: 8px; width: 18px; height: 18px; border-left: 2px solid #ff3340; border-top: 2px solid #ff3340; }
+    .card::after { content:""; position: absolute; right: 8px; bottom: 8px; width: 18px; height: 18px; border-right: 2px solid #ff3340; border-bottom: 2px solid #ff3340; }
+    .card .idx { position: absolute; right: 12px; top: 9px; color: #ffc857; font: 700 10px "Courier New",monospace; }
+    .card .tag { color: #25e0c8; border: 1px solid rgba(37,224,200,.55); padding: 2px 8px; font: 700 10px "Courier New",monospace; }
+    .card .text { font: 700 15px "Kaiti SC",serif; line-height: 1.6; }
+    .card .src { color: #6c7aa8; font-size: 10px; }
+    .card:nth-child(1) { transform: translateX(-170px) rotate(-16deg); }
+    .card:nth-child(2) { transform: translateX(-88px) rotate(-8deg); }
+    .card:nth-child(3) { transform: translateX(0) rotate(0) translateY(-10px); border-color: #ff3340; box-shadow: 0 0 30px rgba(255,51,64,.3), 0 0 0 1px #ff3340; }
+    .card:nth-child(4) { transform: translateX(88px) rotate(8deg); }
+    .card:nth-child(5) { transform: translateX(170px) rotate(16deg); }
+    .controls { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-width: 112px; padding: 10px 14px; color: #25e0c8; border: 1px solid #25e0c8; background: rgba(37,224,200,.06); font: 700 13px "Songti SC",serif; letter-spacing: .12em; box-shadow: 0 0 12px rgba(37,224,200,.18); }
+    .btn.red { color: #ff3340; border-color: #ff3340; box-shadow: 0 0 12px rgba(255,51,64,.25); }
+    .btn.solid { color: #05070d; background: linear-gradient(135deg,#ff3340,#ffc857); border-color: transparent; }
+    .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(3,5,10,.82); backdrop-filter: blur(8px); }
+    .result { position: relative; width: min(540px,90vw); padding: 40px 36px 32px; text-align: center; background: linear-gradient(160deg,#0d1220,#060910); border: 1px solid #ff3340; box-shadow: 0 0 44px rgba(255,51,64,.28), inset 0 0 50px rgba(37,224,200,.05); }
+    .result::before, .result::after { content:""; position: absolute; width: 44px; height: 44px; border-color: #ffc857; }
+    .result::before { left: 10px; top: 10px; border-left: 2px solid; border-top: 2px solid; }
+    .result::after { right: 10px; bottom: 10px; border-right: 2px solid; border-bottom: 2px solid; }
+    .r-seal { display: grid; place-items: center; width: 52px; height: 52px; margin: 0 auto 16px; color: #05070d; background: linear-gradient(135deg,#ff3340,#ffc857); font: 700 25px "Kaiti SC",serif; box-shadow: 0 0 26px rgba(255,51,64,.7); transform: rotate(-3deg); }
+    .kicker { color: #25e0c8; font: 700 11px "Courier New",monospace; letter-spacing: .3em; }
+    blockquote { margin: 18px 0 20px; font: 700 28px "Kaiti SC",serif; line-height: 1.6; text-shadow: 0 0 20px rgba(255,200,87,.25); }
+    .src { color: #6c7aa8; font-size: 12px; }
+    .r-actions { display: flex; justify-content: center; gap: 10px; margin-top: 26px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="seal">问</div><div><h1>遇事不决问毛选</h1><div class="sub">LINGSHI-ONLINE · 灵识已接入</div></div></div>
+      <span class="tag">预览 04 · 赛博道观</span>
+    </header>
+    <main>
+      <section>
+        <div class="hud">
+          <div class="cam-subject">
+            <svg class="hand-svg" viewBox="0 0 120 120">
+              <path d="M52 64 L52 34 M52 34 L58 26 M58 26 L63 20 M52 34 L42 30 M42 30 L36 24 M52 34 L44 44 M44 44 L34 42 M34 42 L26 40 M52 38 L62 42 M62 42 L68 38 M68 38 L74 32 M52 42 L64 50 M64 50 L72 48 M72 48 L80 44 M52 46 L62 56 M62 56 L72 56 M72 56 L82 54 M50 66 L50 96 M50 96 L60 96 M60 96 L60 104 M50 96 L40 96 M40 96 L40 104" />
+            </svg>
+          </div>
+          <div class="scan"></div>
+          <span class="hud-label red">HAND TRACKING</span>
+          <span class="hud-label" style="left:16px;top:34px">PINCH · LOCKED</span>
+          <span class="hud-data">SWIPE L/R · OK</span>
+        </div>
+        <div class="controls"><span class="btn">← 上一张</span><span class="btn red">收拢抽牌</span><span class="btn">下一张 →</span></div>
+      </section>
+      <section class="deck">
+        <div class="deck-head"><h2>电子签文</h2><span class="deck-count">REMAIN 32 · ASKED 0</span></div>
+        <div class="fan">
+          <div class="card"><span class="idx">01</span><span class="tag">POEM</span><span class="text">数风流人物，还看今朝</span><span class="src">《沁园春·雪》</span></div>
+          <div class="card"><span class="idx">02</span><span class="tag">MASS</span><span class="text">群众是真正的英雄</span><span class="src">《农村调查》序言</span></div>
+          <div class="card"><span class="idx">03</span><span class="tag">WILL</span><span class="text">世上无难事，只要肯登攀</span><span class="src">《水调歌头·重上井冈山》</span></div>
+          <div class="card"><span class="idx">04</span><span class="tag">STRATEGY</span><span class="text">一切反动派都是纸老虎</span><span class="src">1946 斯特朗谈话</span></div>
+          <div class="card"><span class="idx">05</span><span class="tag">ACTION</span><span class="text">一万年太久，只争朝夕</span><span class="src">《满江红·和郭沫若同志》</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="modal">
+    <div class="result">
+      <div class="r-seal">答</div>
+      <div class="kicker">遇事不决 · 问毛选</div>
+      <blockquote>世上无难事，只要肯登攀。</blockquote>
+      <div class="src">《水调歌头·重上井冈山》（1965年5月）</div>
+      <div class="r-actions"><span class="btn">收起</span><span class="btn solid">再问一次</span></div>
+    </div>
+  </div>
+</body>
+</html>
