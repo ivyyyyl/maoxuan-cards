@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>预览 1 · 黑金玄机台</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      min-height: 100vh;
+      color: #eadfc3;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      background:
+        repeating-linear-gradient(0deg, rgba(201,164,92,0.025) 0 1px, transparent 1px 5px),
+        radial-gradient(120% 90% at 50% 0%, #191009 0%, #0b0805 58%, #070503 100%);
+    }
+    .shell { width: min(1180px, 100%); margin: 0 auto; padding: 26px 30px 40px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(201,164,92,0.45); }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .seal { display: grid; place-items: center; width: 50px; height: 50px; color: #0b0805; background: #c9a45c; font: 700 25px "Kaiti SC","KaiTi",serif; box-shadow: 0 0 26px rgba(201,164,92,0.35); }
+    h1 { font: 700 30px "Kaiti SC","KaiTi",serif; letter-spacing: .12em; }
+    .sub { margin-top: 5px; color: #8d7f60; font-size: 13px; letter-spacing: .18em; }
+    .tag { color: #a92a1e; border: 1px solid #a92a1e; padding: 7px 12px; font-size: 12px; letter-spacing: .2em; }
+    main { display: grid; grid-template-columns: 460px 1fr; gap: 26px; padding-top: 26px; }
+    .frame { position: relative; aspect-ratio: 4/3; overflow: hidden; border: 1px solid #c9a45c; background: #060403; box-shadow: 0 24px 70px rgba(0,0,0,.55), inset 0 0 70px rgba(0,0,0,.7); }
+    .frame::before, .frame::after { content: ""; position: absolute; width: 26px; height: 26px; border-color: #c9a45c; }
+    .frame::before { left: 10px; top: 10px; border-left: 2px solid; border-top: 2px solid; }
+    .frame::after { right: 10px; bottom: 10px; border-right: 2px solid; border-bottom: 2px solid; }
+    .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(201,164,92,0.06) 0 1px, transparent 1px 4px); }
+    .cam-subject { position: absolute; inset: 0; display: grid; place-items: center; }
+    .hand-svg { width: 240px; height: 240px; opacity: .9; filter: drop-shadow(0 0 12px rgba(201,164,92,.45)); }
+    .rec { position: absolute; left: 18px; top: 16px; display: flex; align-items: center; gap: 8px; color: #c9a45c; font: 700 12px "Courier New",monospace; letter-spacing: .18em; }
+    .rec::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #a92a1e; box-shadow: 0 0 10px #a92a1e; animation: pulse 1s infinite; }
+    @keyframes pulse { 50% { opacity: .4; } }
+    .cam-status { position: absolute; right: 18px; bottom: 14px; color: #8d7f60; font-size: 12px; letter-spacing: .14em; }
+    .deck { position: relative; min-height: 330px; }
+    .deck-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
+    .deck-head h2 { font: 700 23px "Kaiti SC","KaiTi",serif; letter-spacing: .08em; }
+    .deck-count { color: #c9a45c; font: 700 12px "Courier New",monospace; letter-spacing: .16em; }
+    .fan { position: relative; height: 300px; }
+    .card { position: absolute; left: 50%; top: 24px; width: 168px; height: 250px; margin-left: -84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 20px 16px; text-align: center; color: #eadfc3; background: linear-gradient(160deg, #1c140b, #0e0a06); border: 1px solid rgba(201,164,92,.8); box-shadow: 0 16px 40px rgba(0,0,0,.5), inset 0 0 34px rgba(201,164,92,.06); transform-origin: 50% 96%; }
+    .card .idx { position: absolute; left: 10px; top: 9px; color: #c9a45c; font: 700 11px "Courier New",monospace; }
+    .card .tag { padding: 3px 8px; font-size: 10px; }
+    .card .text { font: 700 16px "Kaiti SC","KaiTi",serif; line-height: 1.6; }
+    .card .src { margin-top: auto; color: #8d7f60; font-size: 11px; }
+    .card:nth-child(1) { transform: translateX(-170px) rotate(-16deg); }
+    .card:nth-child(2) { transform: translateX(-88px) rotate(-8deg); }
+    .card:nth-child(3) { transform: translateX(0) rotate(0deg) translateY(-10px); border-color: #c9a45c; box-shadow: 0 0 34px rgba(201,164,92,.3), 0 18px 44px rgba(0,0,0,.55); }
+    .card:nth-child(4) { transform: translateX(88px) rotate(8deg); }
+    .card:nth-child(5) { transform: translateX(170px) rotate(16deg); }
+    .controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; color: #c9a45c; background: transparent; border: 1px solid #c9a45c; font: 700 14px "Songti SC",serif; letter-spacing: .16em; cursor: pointer; }
+    .btn.gold { color: #0b0805; background: #c9a45c; }
+    .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(4,3,2,.72); backdrop-filter: blur(6px); }
+    .result { position: relative; width: min(520px, 90vw); padding: 44px 38px 34px; text-align: center; background: linear-gradient(165deg, #191009, #0c0805); border: 2px solid #c9a45c; box-shadow: 0 30px 90px rgba(0,0,0,.7), inset 0 0 60px rgba(201,164,92,.07); }
+    .result::before { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(201,164,92,.5); pointer-events: none; }
+    .r-seal { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto 16px; color: #eadfc3; background: #a92a1e; font: 700 24px "Kaiti SC",serif; box-shadow: 0 0 24px rgba(169,42,30,.45); }
+    .kicker { color: #c9a45c; font-size: 12px; letter-spacing: .34em; }
+    blockquote { margin: 18px 0 20px; font: 700 28px "Kaiti SC","KaiTi",serif; line-height: 1.6; }
+    .src { color: #8d7f60; font-size: 13px; }
+    .r-actions { display: flex; justify-content: center; gap: 10px; margin-top: 26px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="seal">问</div><div><h1>遇事不决问毛选</h1><div class="sub">掌心一张牌，答案自己来</div></div></div>
+      <span class="tag">预览 01 · 黑金玄机台</span>
+    </header>
+    <main>
+      <section>
+        <div class="frame">
+          <div class="cam-subject">
+            <svg class="hand-svg" viewBox="0 0 120 120" fill="none" stroke="#c9a45c" stroke-width="1.6">
+              <path d="M52 64 L52 34 M52 34 L58 26 M58 26 L63 20 M52 34 L42 30 M42 30 L36 24 M52 34 L44 44 M44 44 L34 42 M34 42 L26 40 M52 38 L62 42 M62 42 L68 38 M68 38 L74 32 M52 42 L64 50 M64 50 L72 48 M72 48 L80 44 M52 46 L62 56 M62 56 L72 56 M72 56 L82 54 M50 66 L50 96 M50 96 L60 96 M60 96 L60 104 M50 96 L40 96 M40 96 L40 104" />
+              <path d="M30 30 L96 88" stroke="#a92a1e" stroke-width="0.8" stroke-dasharray="3 5"/>
+            </svg>
+          </div>
+          <div class="scanlines"></div>
+          <div class="rec">REC 收拢</div>
+          <div class="cam-status">HAND TRACK · PINCH 0.22</div>
+        </div>
+        <div class="controls"><span class="btn">左划 · 上一张</span><span class="btn">右划 · 下一张</span><span class="btn gold">收拢抽牌</span></div>
+      </section>
+      <section class="deck">
+        <div class="deck-head"><h2>玄机牌扇</h2><span class="deck-count">余 32 · 已问 0</span></div>
+        <div class="fan">
+          <div class="card"><span class="idx">01</span><span class="tag">诗词</span><span class="text">雄关漫道真如铁</span><span class="src">《忆秦娥·娄山关》</span></div>
+          <div class="card"><span class="idx">02</span><span class="tag">作风</span><span class="text">实事求是</span><span class="src">《改造我们的学习》</span></div>
+          <div class="card"><span class="idx">03</span><span class="tag">战略</span><span class="text">星星之火，可以燎原</span><span class="src">《星星之火，可以燎原》</span></div>
+          <div class="card"><span class="idx">04</span><span class="tag">青年</span><span class="text">希望寄托在你们身上</span><span class="src">1957 莫斯科讲话</span></div>
+          <div class="card"><span class="idx">05</span><span class="tag">信心</span><span class="text">前途是光明的</span><span class="src">《关于重庆谈判》</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="modal">
+    <div class="result">
+      <div class="r-seal">答</div>
+      <div class="kicker">遇事不决 · 问毛选</div>
+      <blockquote>星星之火，可以燎原。</blockquote>
+      <div class="src">《星星之火，可以燎原》（1930年1月5日）</div>
+      <div class="r-actions"><span class="btn">收起</span><span class="btn gold">再问一次</span></div>
+    </div>
+  </div>
+</body>
+</html>
